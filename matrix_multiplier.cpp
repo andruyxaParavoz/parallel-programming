@@ -3,6 +3,10 @@
 #include <vector>
 #include <sstream>
 #include <chrono>
+#include <filesystem>
+#include <string>
+
+namespace fs = std::filesystem;
 
 std::vector<std::vector<int>> readMatrix(std::string filename) {
     std::ifstream file(filename);
@@ -57,23 +61,31 @@ std::vector<std::vector<int>> multiplyMatrices(std::vector<std::vector<int>> A, 
 }
 
 int main() {
-    std::string path = "C:\\Users\\OrangeFruit\\Desktop\\parallel_programming\\lab1\\";
+    std::string basePath = "C:\\Users\\OrangeFruit\\Desktop\\parallel_programming\\lab1\\";
 
-    auto start = std::chrono::high_resolution_clock::now();
+    std::vector<int> sizes = {200, 400, 800, 1200, 1600, 2000};
 
-    std::vector<std::vector<int>> A = readMatrix(path + "matrix_A.txt");
-    std::vector<std::vector<int>> B = readMatrix(path + "matrix_B.txt");
-    std::vector<std::vector<int>> C = multiplyMatrices(A, B);
-    writeMatrix(path + "result.txt", C);
+    for (int n : sizes) {
+        std::string folderPath = basePath + "matrix_size_" + std::to_string(n) + "\\";
 
-    auto end = std::chrono::high_resolution_clock::now();
-    auto time = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+        std::vector<std::vector<int>> A = readMatrix(folderPath + "matrix_A.txt");
+        std::vector<std::vector<int>> B = readMatrix(folderPath + "matrix_B.txt");
 
-    int n = A.size();
-    long long operations = 2LL * n * n * n;
+        auto start = std::chrono::high_resolution_clock::now();
 
-    std::cout << "Time: " << time << " microseconds" << std::endl;
-    std::cout << "Volume: " << n << "x" << n << " (" << operations << " operations)" << std::endl;
+        std::vector<std::vector<int>> C = multiplyMatrices(A, B);
 
+        auto end = std::chrono::high_resolution_clock::now();
+        auto time = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+
+        writeMatrix(folderPath + "result.txt", C);
+
+        int matrixSize = A.size();
+        long long operations = 2LL * matrixSize * matrixSize * matrixSize;
+
+        std::cout << "Time: " << time << " microseconds" << std::endl;
+        std::cout << "Volume: " << matrixSize << "x" << matrixSize << " (" << operations << " operations)" << std::endl;
+        std::cout << std::endl;
+    }
     return 0;
 }
