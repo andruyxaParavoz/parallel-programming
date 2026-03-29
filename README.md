@@ -144,7 +144,7 @@ int main() {
 1200x1200,11 814 654,5 836 412,7 945 967,7 861 498 
 1600x1600,34 931 867,18 276 421,20 473 300,20 812 275 
 2000x2000,75 620 522,38 931 261,44 059 834,44 999 624
-!(https://github.com/andruyxaParavoz/parallel-programming/blob/lab2/plots/threads.png)
+![Threads](https://github.com/andruyxaParavoz/parallel-programming/blob/lab2/plots/threads.png)
   
   Влияние числа ядер
   Фиксированное количество потоков - 4
@@ -155,7 +155,7 @@ int main() {
 1200x1200,13 263 392,15 664 607,7 945 967 +2
 1600x1600,34 235 887,42 144 348,20 473 300 +2
 2000x2000,82 931 627,89 389 935,44 059 834 +2
-!(https://github.com/andruyxaParavoz/parallel-programming/blob/lab2/plots/cores.png)
+![Cores](https://github.com/andruyxaParavoz/parallel-programming/blob/lab2/plots/cores.png)
 
 
 
